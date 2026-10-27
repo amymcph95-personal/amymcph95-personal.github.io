@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+
+  /* Screen-reader-only text (used for the hero h1 so the visual type can be decorative) */
+  .sr-only-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Hide the native cursor when the Figma-style custom cursor is active. */
+  .cursor-none,
+  .cursor-none * {
+    cursor: none !important;
+  }
+
+  /* Respect reduced-motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/70 bg-white/60 backdrop-blur-xl;
+  }
+
+  .glass-strong {
+    @apply border border-white/80 bg-white/75 backdrop-blur-2xl;
+  }
+
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Type system (Figtree). Values come from the Figma designs; every piece of text
+   in the app uses one of these classes instead of ad-hoc sizes.
+
+   Class            Size (mobile → desktop)  Weight  Tracking  Line-height  Use
+   .t-display       40 → 52 → 65             600     -3%       0.95         case-study H1, 404 title
+   .t-h2-lg         32 → 38 → 44             600     -3%       0.992        About statement
+   .t-h2            24 → 26                  600     -2%       1.15         section headings, "More projects"
+   .t-card-title    20                       600     -1%       1.1          project card titles, columns cards
+   .t-subhead       17                       600     -2%       1.3          bullet titles
+   .t-lead          18                       500     -2%       1.45         intro copy under H1, About bio
+   .t-body          16                       400     -2%       1.5          body copy
+   .t-meta          16 → 18                  500     -2%       1.3          project facts values
+   .t-nav           16 → 18                  600     -3%       1            top navigation
+   .t-pill          14                       600     -3%       1            tags, filters, buttons, sticky nav
+   .t-small-strong  14                       600     -1%       1.2          company names, brand names
+   .t-small         12                       500     0         1.3          roles, captions
+   .t-overline      12 uppercase             600     +6%       1.2          eyebrows (company)
+   .t-label         11 uppercase             600     +8%       1.2          meta labels, section labels
+   .t-alert         16                       600     -3%       normal       availability alert bar
+   .t-footer        14                       400     0         1.4          footer
+   Muted text colours are ink at 65–75% (Figma uses 40–60%, which fails WCAG AA on the cream canvas).
+   ───────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  .t-display { font-size: 40px; font-weight: 600; letter-spacing: -0.03em; line-height: 0.95; }
+  .t-h2-lg { font-size: 32px; font-weight: 600; letter-spacing: -0.03em; line-height: 0.992; }
+  .t-h2 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+  .t-card-title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+  .t-subhead { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
+  .t-lead { font-size: 18px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.45; @apply text-ink/80; }
+  .t-body { font-size: 16px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.5; @apply text-ink/75; }
+  .t-meta { font-size: 16px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; }
+  .t-nav { font-size: 16px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+  .t-pill { font-size: 14px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+  .t-small-strong { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+  .t-small { font-size: 12px; font-weight: 500; line-height: 1.3; @apply text-ink/80; }
+  .t-overline { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; line-height: 1.2; text-transform: uppercase; @apply text-ink/75; }
+  .t-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; line-height: 1.2; text-transform: uppercase; @apply text-ink/75; }
+  .t-alert { font-size: 16px; font-weight: 600; letter-spacing: -0.03em; line-height: normal; }
+  .t-footer { font-size: 14px; font-weight: 400; line-height: 1.4; @apply text-ink/70; }
+
+  @media (min-width: 640px) {
+    .t-display { font-size: 52px; }
+    .t-h2-lg { font-size: 38px; }
+    .t-h2 { font-size: 26px; }
+    .t-nav { font-size: 18px; }
+  }
+  @media (min-width: 1024px) {
+    .t-display { font-size: 65px; }
+    .t-h2-lg { font-size: 44px; }
+    .t-meta { font-size: 18px; }
+  }
+  @media (max-width: 639px) {
+    .t-meta { font-size: 16px; }
+  }
+}
