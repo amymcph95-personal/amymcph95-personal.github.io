@@ -23,7 +23,6 @@ export default function WorkCard({ work, compact }: WorkCardProps) {
     >
       <Link
         to={`/work/${work.id}`}
-        data-cursor-label="View project"
         draggable={false}
         className="group flex h-full w-full flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/80 focus-visible:ring-offset-4 focus-visible:ring-offset-canvas rounded-[16px]"
       >

@@ -112,7 +112,6 @@ export default function MoreProjects({ currentId }: { currentId: string }) {
         aria-label="More projects carousel"
         aria-describedby="carousel-help"
         tabIndex={0}
-        data-cursor-label="Drag"
         onScroll={update}
         onKeyDown={onKeyDown}
         onPointerDown={onPointerDown}

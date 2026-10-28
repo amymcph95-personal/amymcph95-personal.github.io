@@ -43,7 +43,6 @@ export default function BrandMarquee() {
     <section
       className="py-10 sm:py-14"
       aria-label="Brands I've worked with"
-      data-cursor-label="That's a loooooooot of brands"
     >
       <p className="t-label mb-6 text-center">
         Brands I&rsquo;ve worked with

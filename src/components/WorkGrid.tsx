@@ -19,7 +19,7 @@ export default function WorkGrid() {
   const visible = active.length === 0 ? sortedWorks : sortedWorks.filter((w) => active.some((t) => w.tags.includes(t)));
 
   return (
-    <section id="work" aria-labelledby="work-heading" data-cursor-label="Wanna take a look?" className="scroll-mt-8 pb-10 pt-6 sm:py-14">
+    <section id="work" aria-labelledby="work-heading" className="scroll-mt-8 pb-10 pt-6 sm:py-14">
       <Container>
         <h2 id="work-heading" className="sr-only-text">Selected product design work</h2>
 

@@ -36,7 +36,6 @@ export default function About() {
   return (
     <section
       id="about"
-      data-cursor-label="That's me!"
       className="mx-auto max-w-[1296px] scroll-mt-24 px-5 py-12 sm:px-8 sm:py-16"
     >
       <div className="relative overflow-hidden rounded-[32px] border border-[#EBEBEB]/50 bg-[#FFE7F6] p-8 sm:p-12 lg:p-14">

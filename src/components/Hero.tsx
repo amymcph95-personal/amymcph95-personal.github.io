@@ -294,6 +294,8 @@ export default function Hero() {
       let lastPointer: { x: number; y: number } | null = null;
       const onDown = (e: PointerEvent) => {
         lastPointer = null;
+        // The drop / reset button handles its own click; don't also drop on its pointerdown.
+        if ((e.target as HTMLElement).closest("button")) return;
         if (e.pointerType !== "mouse" && mode !== "dropped") {
           tap = { id: e.pointerId, x: e.clientX, y: e.clientY, t: performance.now() };
           return;
@@ -381,6 +383,35 @@ export default function Hero() {
       stage.addEventListener("pointerup", onUp);
       stage.addEventListener("pointercancel", onUp);
 
+      // ── Scroll jolt: a fast scroll shakes the page, so the dropped letters hop and fall back. ──
+      // Slow scrolling does nothing; the harder the flick, the higher they jump.
+      let scrollY = window.scrollY;
+      let scrollT = performance.now();
+      let lastJolt = 0;
+      const jumpScale = Math.min(1.2, Math.max(0.5, fontSize / 120));
+      const onScroll = () => {
+        const now = performance.now();
+        const dy = window.scrollY - scrollY;
+        const dtMs = Math.max(1, now - scrollT);
+        scrollY = window.scrollY;
+        scrollT = now;
+        if (mode !== "dropped" || !visible || drag) return;
+        const speed = Math.abs(dy) / dtMs; // px per ms
+        if (speed < 1.1 || now - lastJolt < 140) return;
+        lastJolt = now;
+        const power = Math.min((speed - 1) / 2.5, 1);
+        bodies.forEach((b) => {
+          Sleeping.set(b, false);
+          Body.setVelocity(b, {
+            x: b.velocity.x + (Math.random() - 0.5) * 5 * power * jumpScale,
+            y: b.velocity.y - (3 + Math.random() * 6) * power * jumpScale,
+          });
+          Body.setAngularVelocity(b, b.angularVelocity + (Math.random() - 0.5) * 0.14 * power);
+        });
+        start();
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+
       // Pause the simulation when the hero is off-screen.
       const io = new IntersectionObserver(([en]) => {
         visible = en.isIntersecting;
@@ -397,6 +428,7 @@ export default function Hero() {
         stage.removeEventListener("pointermove", onMove);
         stage.removeEventListener("pointerup", onUp);
         stage.removeEventListener("pointercancel", onUp);
+        window.removeEventListener("scroll", onScroll);
         io.disconnect();
         if (raf) cancelAnimationFrame(raf);
         Composite.clear(engine.world, false);
@@ -419,7 +451,7 @@ export default function Hero() {
   let letterIndex = -1;
 
   return (
-    <header className="relative px-5 pb-3 pt-4 sm:px-8 sm:pb-8 sm:pt-10 lg:px-10 lg:pt-14 xl:px-0" data-cursor-label={reduced ? undefined : dropped ? "Toss me around" : "Click me"}>
+    <header className="relative px-5 pb-3 pt-4 sm:px-8 sm:pb-8 sm:pt-10 lg:px-10 lg:pt-14 xl:px-0" data-cursor-label={reduced || dropped ? undefined : "Click me"}>
       <h1 className="sr-only-text">Amy’s Product & UX/UI Design Folio: Amy McPherson, Creative Product Designer at Canva</h1>
 
       {/* Physics stage: the whole hero block is the canvas, so letters can scatter across all of it. */}
@@ -483,7 +515,6 @@ export default function Hero() {
             onClick={() => (dropped ? apiRef.current?.compose() : apiRef.current?.drop())}
             aria-label={dropped ? "Reset the letters" : "Drop the letters"}
             title={dropped ? "Reset letters" : "Drop letters"}
-            data-cursor-label={dropped ? "Reset" : "Drop"}
             className="absolute right-0 top-0 z-30 flex h-8 w-8 items-center before:absolute before:-inset-2 before:content-[''] sm:h-11 sm:w-11 sm:before:inset-0 justify-center rounded-full bg-card text-ink/80 transition-colors hover:bg-pill-pink hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/80"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
