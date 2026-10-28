@@ -38,8 +38,10 @@ export default function TopNav({ navRef }: TopNavProps) {
     <nav
       ref={navRef as React.RefObject<HTMLElement>}
       aria-label="Top navigation"
-      className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-2 py-4 sm:px-8 sm:py-8 lg:px-[68px] lg:py-[42px]"
+      className="mx-auto w-full max-w-[1264px] px-5 py-4 sm:px-8 sm:py-8 lg:px-10 lg:py-[42px] xl:px-0"
     >
+      {/* -mx-3 cancels the links' 12px hit-area padding so the dot and mail icon sit on the content edges */}
+      <div className="-mx-3 flex items-center justify-between">
       <MagneticLink href="/" label="Home">
         <HomeIcon />
       </MagneticLink>
@@ -57,6 +59,7 @@ export default function TopNav({ navRef }: TopNavProps) {
         <MagneticLink href={`mailto:${EMAIL}`} label="Email">
           <EmailIcon />
         </MagneticLink>
+      </div>
       </div>
     </nav>
   );

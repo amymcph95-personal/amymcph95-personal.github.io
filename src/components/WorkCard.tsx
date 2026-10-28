@@ -29,7 +29,7 @@ export default function WorkCard({ work, compact }: WorkCardProps) {
       >
         <div className="flex h-full flex-col gap-4 rounded-[16px] bg-card p-3 pb-5 transition-colors duration-300 group-hover:bg-[#F0EDEA] sm:p-3.5 sm:pb-5">
           {/* Image slot: pink placeholder until an image src is provided */}
-          <div className="relative w-full overflow-hidden rounded-[8px] bg-placeholder" style={{ aspectRatio: "568 / 616" }}>
+          <div className="relative w-full overflow-hidden rounded-[8px] bg-placeholder" style={{ aspectRatio: "1 / 1" }}>
             {image?.src && (
               <img
                 src={image.src}

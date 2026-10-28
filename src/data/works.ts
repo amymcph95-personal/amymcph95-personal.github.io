@@ -96,7 +96,7 @@ export interface Work {
   /** One entry per hero image slot (two entries = side-by-side hero). */
   heroImages: Media[];
   blocks: Block[];
-  /** Homepage / “More projects” card image (portrait, 568:616). */
+  /** Homepage / “More projects” card image (square, 1:1). */
   cardImage?: { src: string; alt: string };
   year?: string;
 }
@@ -397,6 +397,86 @@ const baseWorks: Work[] = [
           video: "/images/work/canva-higher-education/outcome.mp4",
           poster: "/images/work/canva-higher-education/outcome.jpg",
           alt: "Screen recording of the redesigned Higher Education page, from the audience re-routing module to the embedded contact form.",
+        },
+      },
+    ],
+  },
+  {
+    id: "canva-ai-vision",
+    title: "Canva AI Vision",
+    headline: "Canva AI Vision",
+    company: "Canva",
+    group: "canva",
+    tags: ["Visual Design", "Product Design"],
+    description:
+      "Case study: how Amy McPherson, Product Designer at Canva, designed and iterated the AI Vision On Demand page across the New York, Sydney and London events, turning one gated video into a library of sessions that also captures business leads.",
+    intro: [
+      "AI Vision is Canva’s event series about AI, held in New York, Sydney and London in 2026. After each event, the session recordings go on an On Demand page. Visitors fill in a short form to watch them, and the form also collects business leads for Canva. I designed that page and changed it after each event, using what we saw in New York to improve Sydney and London.",
+    ],
+    meta: {
+      role: "Product Designer",
+      team: "Marketing Technology",
+      timeline: "1 month each",
+      tools: "Figma, Looker",
+      businessModel: "SaaS/Tech",
+    },
+    heroImages: [
+      {
+        ratio: "narrow",
+        src: "/images/work/canva-ai-vision/hero.jpg",
+        alt: "The AI Vision speaker on stage in a green jacket, surrounded by floating images of a cloud penguin, bubbles, a purple fabric and a blue sky.",
+      },
+    ],
+    blocks: [
+      {
+        type: "dotPoints",
+        heading: "The Challenge",
+        intro:
+          "An event lasts a day, but the recordings can be watched for months. The On Demand page has to keep people’s attention after the event ends, and collect business leads at the same time.",
+        items: [
+          { title: "Visitors left before reaching the recordings", body: "Most traffic came from a post-event email, so people already knew about AI Vision. Still, 79% didn’t scroll, 54% left within 5 seconds, and only 3% got past the form to a session." },
+          { title: "The next step was unclear", body: "The page promoted events that had already closed registration, and the Watch page offered a single video." },
+          { title: "Three cities, a changing brief", body: "Each event brought new speakers, sponsors and requests." },
+        ],
+      },
+      {
+        type: "dotPoints",
+        heading: "The Solution",
+        intro: "I treated the page as one system and improved it after each event.",
+        items: [
+          { title: "Trust and next steps up front", body: "Partner logos moved above the speakers, and a bar at the top links to tickets for the next AI Vision. It replaced a banner at the bottom that got 0.23% of clicks." },
+          { title: "A library, not one video", body: "The Watch page lists every session, with tabs for past AI Vision events, so visitors have more to watch." },
+          { title: "Built from swappable sections", body: "Speakers, logos, colours and sessions change for each city. A new sponsor section and short interest form fitted in without a redesign." },
+        ],
+      },
+      {
+        type: "largeImage",
+        heading: "The Approach",
+        items: [
+          { title: "New York, March 2026", body: "We launched with a gated page, a Watch page with one recording and an interest form. Afterwards I audited it. 84% of traffic came from email, and 97% of Watch page clicks went to the one video." },
+          { title: "Sydney, August 2026", body: "I applied those findings. Logos moved up, a promo bar replaced the interest banner, and I removed the outdated interest form. I also added a sponsor section and turned the single video into a grid of sessions." },
+          { title: "London, September 2026", body: "The same system with new speakers, sponsors and colours, and tabs for every past AI Vision." },
+        ],
+        media: {
+          ratio: "16:9",
+          src: "/images/work/canva-ai-vision/approach.jpg",
+          alt: "The AI Vision On Demand pages for New York, Sydney and London side by side, each with new speakers, sponsors and colours.",
+        },
+      },
+      {
+        type: "imgModule",
+        heading: "The Outcome",
+        paragraphs: [
+          "The On Demand page grew from one video into a library of sessions across three events. Each version used what we learned from the one before. The events went well too, and Sydney sold out.",
+        ],
+        badge: "Prototype",
+        badgeHref:
+          "https://www.figma.com/proto/tvmn1V3WZ77naFLkwQMhys/Canva-Files?node-id=7-26090&viewport=476%2C-811%2C0.25&t=N5JSHoPxUFUvk1wJ-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=7%3A26090&page-id=0%3A1",
+        media: {
+          ratio: "16:9",
+          video: "/images/work/canva-ai-vision/outcome.mp4",
+          poster: "/images/work/canva-ai-vision/outcome.jpg",
+          alt: "Screen recording scrolling through the finished AI Vision On Demand page.",
         },
       },
     ],
@@ -935,6 +1015,7 @@ const CARD_ALTS: Record<string, string> = {
   "canva-quickpage-ai": "The QuickPage AI editor above the brief upload screen, with a purple googly-eyed character.",
   "canva-higher-education": "The redesigned Canva for Higher Education page with student and faculty re-routing cards.",
   "canva-contact-sales": "Step 1 of 2 of the redesigned Canva Contact Sales form.",
+  "canva-ai-vision": "The AI Vision: Sydney 2026 On Demand page hero, with the speaker and floating images against a blue sky.",
   "envato-x-adobe-express": "The Envato x Adobe Express “Reimagine to win $10K” campaign page.",
   "play-tennis": "The redesigned Play Tennis website on a laptop with two smiling children on a court.",
   "upguard": "The UpGuard Vendor Risk landing page with the “Take control of vendor risk management” hero.",
